@@ -14,6 +14,7 @@
       "mcp__playwright__*",
       "mcp__web-search-prime__*",
       "mcp__web-reader__*",
+      "mcp__zai-mcp-server__*",
       "mcp__ide__*",
       "Bash(cp:*)",
       "Bash(mkdir:*)",

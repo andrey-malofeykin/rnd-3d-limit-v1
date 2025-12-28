@@ -82,6 +82,8 @@ export class ThreeSceneService implements OnDestroy {
       this.camera1Config.far
     );
     this.updateCameraPosition(this.mainCamera, this.camera1Config);
+    // Important: update projection matrix before creating CameraHelper
+    this.mainCamera.updateProjectionMatrix();
 
     // Create Camera 2
     this.camera2 = new THREE.PerspectiveCamera(
@@ -91,6 +93,7 @@ export class ThreeSceneService implements OnDestroy {
       this.camera2Config.far
     );
     this.updateCameraPosition(this.camera2, this.camera2Config);
+    this.camera2.updateProjectionMatrix();
 
     // Create camera helper for Camera 1
     this.cameraHelper = new THREE.CameraHelper(this.mainCamera);
@@ -155,6 +158,7 @@ export class ThreeSceneService implements OnDestroy {
     camera.position.y = config.distance * Math.sin(config.phi) * Math.sin(config.theta);
     camera.position.z = config.distance * Math.cos(config.phi);
     camera.lookAt(0, 0, 0);
+    camera.updateMatrixWorld();
   }
 
   updateCamera1(config: Partial<CameraConfig>): void {
