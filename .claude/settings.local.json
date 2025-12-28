@@ -13,7 +13,8 @@
       "mcp__playwright__*",
       "Bash(cp:*)",
       "Bash(mkdir:*)",
-      "Bash(npm:*)"
+      "Bash(npm:*)",
+      "Bash(npx:*)"
     ]
   }
 }
