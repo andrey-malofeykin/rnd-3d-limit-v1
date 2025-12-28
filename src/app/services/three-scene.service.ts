@@ -22,8 +22,12 @@ export class ThreeSceneService implements OnDestroy {
   private axesHelper!: THREE.AxesHelper;
   private parallelepiped!: THREE.Mesh;
 
+  // 2D renderer for camera1 view
+  private renderer2D!: THREE.WebGLRenderer;
+
   private animationId: number | null = null;
   private canvasElementRef: ElementRef<HTMLCanvasElement> | null = null;
+  private canvas2DElementRef: ElementRef<HTMLCanvasElement> | null = null;
 
   // Camera 1 configuration
   camera1Config: CameraConfig = {
@@ -183,6 +187,11 @@ export class ThreeSceneService implements OnDestroy {
       this.cameraHelper.update();
       this.renderer.render(this.scene, this.camera2);
     }
+
+    // Render 2D view from camera1
+    if (this.renderer2D && this.scene && this.mainCamera) {
+      this.renderer2D.render(this.scene, this.mainCamera);
+    }
   }
 
   private onWindowResize = (): void => {
@@ -199,6 +208,14 @@ export class ThreeSceneService implements OnDestroy {
     this.camera2.updateProjectionMatrix();
 
     this.renderer.setSize(width, height);
+
+    // Resize 2D renderer if exists
+    if (this.canvas2DElementRef && this.renderer2D) {
+      const canvas2D = this.canvas2DElementRef.nativeElement;
+      const width2D = canvas2D.clientWidth;
+      const height2D = canvas2D.clientHeight;
+      this.renderer2D.setSize(width2D, height2D);
+    }
   };
 
   getCamera1Config(): CameraConfig {
@@ -209,6 +226,29 @@ export class ThreeSceneService implements OnDestroy {
     return { ...this.camera2Config };
   }
 
+  /**
+   * Initialize 2D renderer for camera1 view projection
+   * Should be called after main initialize() method
+   */
+  initialize2D(canvasRef: ElementRef<HTMLCanvasElement>): void {
+    if (!this.scene || !this.mainCamera) {
+      throw new Error('Main scene must be initialized first. Call initialize() before initialize2D().');
+    }
+
+    this.canvas2DElementRef = canvasRef;
+    const canvas = canvasRef.nativeElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    // Create second renderer for 2D view from camera1
+    this.renderer2D = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true
+    });
+    this.renderer2D.setSize(width, height);
+    this.renderer2D.setPixelRatio(window.devicePixelRatio);
+  }
+
   ngOnDestroy(): void {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
@@ -217,6 +257,10 @@ export class ThreeSceneService implements OnDestroy {
 
     if (this.renderer) {
       this.renderer.dispose();
+    }
+
+    if (this.renderer2D) {
+      this.renderer2D.dispose();
     }
   }
 }

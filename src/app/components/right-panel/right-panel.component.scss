@@ -21,32 +21,15 @@
 .panel-content {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
 }
 
-.placeholder-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 32px;
-  background-color: #ffffff;
+.canvas-2d {
+  width: 100%;
+  height: 100%;
+  display: block;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-}
-
-.placeholder-icon {
-  font-size: 64px !important;
-  width: 64px !important;
-  height: 64px !important;
-  color: #9e9e9e;
-}
-
-.placeholder-text {
-  margin: 0;
-  font-size: 1rem;
-  color: #757575;
-  text-align: center;
 }
