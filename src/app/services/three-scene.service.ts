@@ -179,9 +179,9 @@ export class ThreeSceneService implements OnDestroy {
   }
 
   private render(): void {
-    if (this.renderer && this.scene && this.mainCamera) {
+    if (this.renderer && this.scene && this.camera2) {
       this.cameraHelper.update();
-      this.renderer.render(this.scene, this.mainCamera);
+      this.renderer.render(this.scene, this.camera2);
     }
   }
 
