@@ -11,10 +11,14 @@
       "mcp__github__*",
       "mcp__context7__*",
       "mcp__playwright__*",
+      "mcp__web-search-prime__*",
+      "mcp__web-reader__*",
+      "mcp__ide__*",
       "Bash(cp:*)",
       "Bash(mkdir:*)",
       "Bash(npm:*)",
-      "Bash(npx:*)"
+      "Bash(npx:*)",
+      "Bash(cd:${workspaceFolder}/*)"
     ],
     "deny": [
       "Bash(cd:**/../**)",

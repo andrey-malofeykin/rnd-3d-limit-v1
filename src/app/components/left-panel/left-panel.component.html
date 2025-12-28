@@ -4,9 +4,92 @@
   </div>
 
   <div class="panel-content">
-    <div class="placeholder-box">
-      <mat-icon class="placeholder-icon">view_in_ar</mat-icon>
-      <p class="placeholder-text">{{ placeholderText() }}</p>
+    <!-- Camera Controls Side Panel -->
+    <div class="camera-controls">
+      <!-- Camera 1 Controls -->
+      <mat-card class="camera-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="camera-icon">videocam</mat-icon>
+            Camera 1 (Main)
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="control-group">
+            <label class="control-label">Distance: {{ cam1Distance() }}</label>
+            <mat-slider min="5" max="50" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam1Distance()" (input)="onCam1DistanceChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Phi (Vertical): {{ cam1Phi() }}°</label>
+            <mat-slider min="5" max="175" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam1Phi()" (input)="onCam1PhiChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Theta (Horizontal): {{ cam1Theta() }}°</label>
+            <mat-slider min="0" max="360" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam1Theta()" (input)="onCam1ThetaChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">FOV: {{ cam1Fov() }}°</label>
+            <mat-slider min="20" max="100" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam1Fov()" (input)="onCam1FovChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-divider></mat-divider>
+
+      <!-- Camera 2 Controls -->
+      <mat-card class="camera-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="camera-icon">videocam</mat-icon>
+            Camera 2
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="control-group">
+            <label class="control-label">Distance: {{ cam2Distance() }}</label>
+            <mat-slider min="5" max="50" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam2Distance()" (input)="onCam2DistanceChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Phi (Vertical): {{ cam2Phi() }}°</label>
+            <mat-slider min="5" max="175" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam2Phi()" (input)="onCam2PhiChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Theta (Horizontal): {{ cam2Theta() }}°</label>
+            <mat-slider min="0" max="360" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam2Theta()" (input)="onCam2ThetaChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">FOV: {{ cam2Fov() }}°</label>
+            <mat-slider min="20" max="100" step="1" class="control-slider">
+              <input matSliderThumb [value]="cam2Fov()" (input)="onCam2FovChange($any($event.target).value)" />
+            </mat-slider>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- 3D Canvas -->
+    <div class="canvas-container" #canvasContainer>
+      <canvas #threeCanvas></canvas>
     </div>
   </div>
 </div>
