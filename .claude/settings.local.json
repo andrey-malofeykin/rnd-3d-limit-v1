@@ -15,6 +15,12 @@
       "Bash(mkdir:*)",
       "Bash(npm:*)",
       "Bash(npx:*)"
+    ],
+    "deny": [
+      "Bash(cd:**/../**)",
+      "Bash(cd://**)",
+      "Bash(cd:C:/**)",
+      "Bash(cd:~/**)"
     ]
   }
 }
