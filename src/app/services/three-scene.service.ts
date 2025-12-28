@@ -238,6 +238,9 @@ export class ThreeSceneService implements OnDestroy {
         this.renderer2D.setSize(width2D, height2D);
       }
     }
+
+    // Immediately render to prevent canvas from being empty during resize
+    this.render();
   }
 
   getCamera1Config(): CameraConfig {
