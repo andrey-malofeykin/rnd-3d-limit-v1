@@ -5,6 +5,7 @@
 
   <div class="panels-wrapper">
     <app-left-panel class="panel left-panel"></app-left-panel>
+    <app-split-resizer class="split-resizer" (resizing)="onResizing()" (resizeEnd)="onResizeEnd()"></app-split-resizer>
     <app-right-panel class="panel right-panel"></app-right-panel>
   </div>
 </div>

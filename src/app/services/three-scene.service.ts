@@ -199,28 +199,46 @@ export class ThreeSceneService implements OnDestroy {
   }
 
   private onWindowResize = (): void => {
+    this.resizeCanvases();
+  };
+
+  /**
+   * Public method to resize canvases based on their container dimensions
+   * Called automatically on window resize and can be called manually when panel sizes change
+   */
+  resizeCanvases(): void {
     if (!this.canvasElementRef || !this.renderer) return;
 
+    // Get 3D canvas container dimensions (left panel)
     const canvas = this.canvasElementRef.nativeElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const container = canvas.parentElement;
+    if (!container) return;
 
-    this.mainCamera.aspect = width / height;
-    this.mainCamera.updateProjectionMatrix();
+    const width3D = container.clientWidth;
+    const height3D = container.clientHeight;
 
-    this.camera2.aspect = width / height;
+    // Update camera2 aspect ratio for 3D view (left panel)
+    this.camera2.aspect = width3D / height3D;
     this.camera2.updateProjectionMatrix();
 
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(width3D, height3D);
 
-    // Resize 2D renderer if exists
+    // Resize 2D renderer and update mainCamera aspect ratio (right panel)
     if (this.canvas2DElementRef && this.renderer2D) {
       const canvas2D = this.canvas2DElementRef.nativeElement;
-      const width2D = canvas2D.clientWidth;
-      const height2D = canvas2D.clientHeight;
-      this.renderer2D.setSize(width2D, height2D);
+      const container2D = canvas2D.parentElement;
+      if (container2D) {
+        const width2D = container2D.clientWidth;
+        const height2D = container2D.clientHeight;
+
+        // Update mainCamera aspect ratio for 2D view (right panel)
+        this.mainCamera.aspect = width2D / height2D;
+        this.mainCamera.updateProjectionMatrix();
+
+        this.renderer2D.setSize(width2D, height2D);
+      }
     }
-  };
+  }
 
   getCamera1Config(): CameraConfig {
     return { ...this.camera1Config };
@@ -243,6 +261,10 @@ export class ThreeSceneService implements OnDestroy {
     const canvas = canvasRef.nativeElement;
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
+
+    // Update mainCamera aspect ratio for 2D view
+    this.mainCamera.aspect = width / height;
+    this.mainCamera.updateProjectionMatrix();
 
     // Create second renderer for 2D view from camera1
     this.renderer2D = new THREE.WebGLRenderer({
