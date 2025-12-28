@@ -1,0 +1,18 @@
+{
+  "enabledMcpjsonServers": [
+    "github",
+    "context7",
+    "chrome-devtools"
+  ],
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "mcp__chrome-devtools__*",
+      "mcp__github__*",
+      "mcp__context7__*",
+      "mcp__playwright__*",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)"
+    ]
+  }
+}
