@@ -2,7 +2,8 @@
   "enabledMcpjsonServers": [
     "github",
     "context7",
-    "chrome-devtools"
+    "chrome-devtools",
+    "playwright"
   ],
   "enableAllProjectMcpServers": true,
   "permissions": {
@@ -20,11 +21,6 @@
       "Bash(npx:*)",
       "Bash(cd:${workspaceFolder}/*)"
     ],
-    "deny": [
-      "Bash(cd:**/../**)",
-      "Bash(cd://**)",
-      "Bash(cd:C:/**)",
-      "Bash(cd:~/**)"
-    ]
+    "deny": []
   }
 }
