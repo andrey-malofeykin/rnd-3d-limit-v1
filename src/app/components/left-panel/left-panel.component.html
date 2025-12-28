@@ -1,11 +1,14 @@
 <div class="left-panel-container">
   <div class="panel-header">
     <h2>{{ panelName() }}</h2>
+    <button mat-icon-button class="toggle-btn" (click)="toggleControls()" [attr.aria-label]="isControlsVisible() ? 'Hide controls' : 'Show controls'">
+      <mat-icon>{{ isControlsVisible() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+    </button>
   </div>
 
   <div class="panel-content">
     <!-- Camera Controls Side Panel -->
-    <div class="camera-controls">
+    <div class="camera-controls" [class.controls-hidden]="!isControlsVisible()">
       <!-- Camera 1 Controls -->
       <mat-card class="camera-card">
         <mat-card-header>

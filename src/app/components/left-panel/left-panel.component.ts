@@ -6,6 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { ThreeSceneService } from '../../services/three-scene.service';
 
@@ -20,6 +21,7 @@ import { ThreeSceneService } from '../../services/three-scene.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     FormsModule
   ],
   templateUrl: './left-panel.component.html',
@@ -27,6 +29,7 @@ import { ThreeSceneService } from '../../services/three-scene.service';
 })
 export class LeftPanelComponent implements AfterViewInit, OnDestroy {
   readonly panelName = signal('3D View Area (Three.js)');
+  readonly isControlsVisible = signal(true);
 
   @ViewChild('canvasContainer', { static: true }) canvasContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('threeCanvas', { static: true }) threeCanvas!: ElementRef<HTMLCanvasElement>;
@@ -120,6 +123,10 @@ export class LeftPanelComponent implements AfterViewInit, OnDestroy {
       theta: (this.cam2Theta() * Math.PI) / 180,
       fov: this.cam2Fov()
     });
+  }
+
+  toggleControls(): void {
+    this.isControlsVisible.update(v => !v);
   }
 
   ngOnDestroy(): void {
